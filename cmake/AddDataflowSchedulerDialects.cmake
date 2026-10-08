@@ -75,6 +75,7 @@ macro(add_dataflow_scheduler_dialects_tool name)
   endif()
 
   add_llvm_executable(${name} ${ARG_UNPARSED_ARGUMENTS})
+  add_dependencies(${name} dataflow-scheduler-dialects-headers)
 
   if(DataflowSchedulerDialects_BUILD_TOOLS AND ARG_EXPORT_NAME)
     # To unify the interface for all consumers, create an alias target.
@@ -100,6 +101,7 @@ function(add_dataflow_scheduler_dialects_library name)
     EXCLUDE_FROM_LIBMLIR
   )
   target_include_directories(${name} PUBLIC ${PROJECT_INCLUDE_DIRS})
+  add_dependencies(${name} dataflow-scheduler-dialects-headers)
 
   if(ARG_GROUP)
     set(_groups DIALECT CONVERSION EXTENSION TRANSLATION)
